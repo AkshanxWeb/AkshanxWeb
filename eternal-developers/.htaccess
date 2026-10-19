@@ -1,0 +1,16 @@
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|tsconfig\.json|vite\.config\.js|README\.md|AGENTS\.md|CLAUDE\.md)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(public/|\.well-known/) - [L]
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
