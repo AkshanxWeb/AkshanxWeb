@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'lead_notifications' => [
+        'to' => env('LEAD_NOTIFICATION_EMAIL'),
+    ],
+
 ];

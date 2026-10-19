@@ -4,9 +4,9 @@ import type { FormEvent } from 'react';
 import SiteLayout from '../Layouts/SiteLayout';
 
 type Service = { id: number; name: string };
-export default function Contact({ services, selectedServiceId }: { services: Service[]; selectedServiceId: number | null }) {
+export default function Contact({ services, selectedServiceId, source }: { services: Service[]; selectedServiceId: number | null; source: string }) {
     const { flash } = usePage().props;
-    const form = useForm({ name: '', email: '', company: '', phone: '', service_id: selectedServiceId as number | null, project_brief: '', budget_range: '', desired_timeline: '', consent: false, website: '' });
+    const form = useForm({ name: '', email: '', company: '', phone: '', service_id: selectedServiceId as number | null, project_brief: '', budget_range: '', desired_timeline: '', source, consent: false, website: '' });
 
     function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -26,7 +26,7 @@ export default function Contact({ services, selectedServiceId }: { services: Ser
                     <p className="contact-email-label">Prefer to keep exploring?</p><Link className="text-link" href="/services">Browse the service catalog <ArrowUpRight size={16} /></Link>
                 </div>
                 <div className="contact-form-wrap">
-                    {flash?.success ? <div className="form-success" role="status"><CheckCircle2 size={25} /><h2>Message received.</h2><p>{flash.success}</p><Link className="text-link" href="/services">Keep exploring <ArrowUpRight size={16} /></Link></div> : <form className="project-form" onSubmit={submit}>
+                    {flash?.success ? <div className="form-success" role="status"><CheckCircle2 size={25} /><h2>Message received.</h2><p>{flash.success}</p>{flash.notification_warning && <p className="form-warning" role="alert">{flash.notification_warning}</p>}<Link className="text-link" href="/services">Keep exploring <ArrowUpRight size={16} /></Link></div> : <form className="project-form" onSubmit={submit}>
                         <div className="form-heading"><span>PROJECT ENQUIRY / 01</span><span>~ 3 MIN</span></div>
                         <h2>Tell us a little<br />about the work.</h2>
                         <div className="form-row"><label>Your name<input value={form.data.name} onChange={(event) => form.setData('name', event.target.value)} autoComplete="name" required />{form.errors.name && <small className="field-error">{form.errors.name}</small>}</label><label>Work email<input type="email" value={form.data.email} onChange={(event) => form.setData('email', event.target.value)} autoComplete="email" required />{form.errors.email && <small className="field-error">{form.errors.email}</small>}</label></div>

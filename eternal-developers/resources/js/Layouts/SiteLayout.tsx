@@ -1,6 +1,8 @@
 import { Link, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import WhatsAppWidget from '../WhatsAppWidget';
+import ChatbotWidget from '../ChatbotWidget';
 
 type LayoutProps = {
     children: React.ReactNode;
@@ -39,6 +41,8 @@ export default function SiteLayout({ children }: LayoutProps) {
                 </nav>
             </header>
             <main>{children}</main>
+            <WhatsAppWidget />
+            <ChatbotWidget />
             <footer className="site-footer">
                 <div className="footer-top">
                     <div>
